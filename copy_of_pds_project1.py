@@ -320,3 +320,6 @@ with gzip.open('model.pkl.gz', 'wb') as f:
     pickle.dump(model, f)
 with gzip.open('data.pkl.gz', 'rb') as f:
     model = pickle.load(f)
+def predict_approval(model, input_data):
+    prediction = model.predict(input_data)  # model is now loaded
+    return prediction
