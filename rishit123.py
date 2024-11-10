@@ -8,7 +8,19 @@ import gzip
 def load_model():
     try:
         with gzip.open("data.pkl.gz", "rb") as f:
-            model = pickle.load(f)
+            model_data = pickle.load(f)
+        
+        # Check if the loaded object is a dictionary and extract the model
+        if isinstance(model_data, dict):
+            model = model_data.get("model")  # Adjust this key based on actual structure
+        else:
+            model = model_data
+
+        # Check if model has 'predict' attribute
+        if not hasattr(model, "predict"):
+            st.error("Loaded object is not a model with a 'predict' method.")
+            return None
+        
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
