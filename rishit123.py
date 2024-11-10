@@ -1,17 +1,18 @@
-import streamlit as st
-import pandas as pd
-import pickle
+# rishit123.py (or your app's main script)
 import gzip
+import pickle
+import streamlit as st
 
-# Load your trained model and any other necessary data files
-@st.cache_resource
+# Function to load the model
 def load_model():
-    with gzip.open("data.pkl.gz", "rb") as f:
+    with gzip.open('data.pkl.gz', 'rb') as f:
         model = pickle.load(f)
     return model
 
-# Load the model
+# Load the model when the script starts
 model = load_model()
+
+
 
 # Set up the Streamlit page
 st.title("Loan Approval Prediction")
@@ -31,10 +32,18 @@ loan_percent_income = st.sidebar.number_input("Loan Percent of Income", min_valu
 cb_person_default_on_file = st.sidebar.selectbox("Default on File", options=["Y", "N"])
 cb_person_cred_hist_length = st.sidebar.number_input("Credit History Length (years)", min_value=0)
 
-# Predict function
+# Prediction function
 def predict_approval(model, input_data):
-    prediction = model.predict(input_data)
-    return "Approved" if prediction == 1 else "Rejected"
+    prediction = model.predict(input_data)  # Predict using the model
+    return prediction
+
+# Streamlit app to handle input and display the result
+def app():
+    input_data = st.text_input("Enter your input data here")  # or use another input method
+    if input_data:
+        # Format or preprocess the input data if needed before passing to the model
+        prediction = predict_approval(model, input_data)  # Call the predict function
+        st.write(f"Prediction: {prediction}")
 
 # Create a button for prediction
 if st.button("Predict Loan Approval"):
