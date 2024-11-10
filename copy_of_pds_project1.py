@@ -318,3 +318,5 @@ print("\nOutput:\n", output)
 # Save the trained model with gzip compression
 with gzip.open('model.pkl.gz', 'wb') as f:
     pickle.dump(model, f)
+with gzip.open('data.pkl.gz', 'rb') as f:
+    model = pickle.load(f)
