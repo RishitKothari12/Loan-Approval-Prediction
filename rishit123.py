@@ -1,7 +1,7 @@
-# rishit123.py (or your app's main script)
 import gzip
 import pickle
 import streamlit as st
+import pandas as pd  # Add this import for pandas
 
 # Function to load the model
 def load_model():
@@ -11,8 +11,6 @@ def load_model():
 
 # Load the model when the script starts
 model = load_model()
-
-
 
 # Set up the Streamlit page
 st.title("Loan Approval Prediction")
@@ -36,14 +34,6 @@ cb_person_cred_hist_length = st.sidebar.number_input("Credit History Length (yea
 def predict_approval(model, input_data):
     prediction = model.predict(input_data)  # Predict using the model
     return prediction
-
-# Streamlit app to handle input and display the result
-def app():
-    input_data = st.text_input("Enter your input data here")  # or use another input method
-    if input_data:
-        # Format or preprocess the input data if needed before passing to the model
-        prediction = predict_approval(model, input_data)  # Call the predict function
-        st.write(f"Prediction: {prediction}")
 
 # Create a button for prediction
 if st.button("Predict Loan Approval"):
