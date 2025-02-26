@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Prediction Result</title>
+    <style>
+        /* Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd; /* New background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Container for Result Display */
+        .container {
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for contrast */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Result Styling */
+        .result-message {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            color: #fff;
+            margin: 20px 0;
+        }
+        
+        /* Approved Message */
+        .approved {
+            background-color: #4caf50;
+        }
+
+        /* Denied Message */
+        .denied {
+            background-color: #f44336;
+        }
+
+        /* Go Back Button */
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #00796b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button Hover Effect */
+        .back-button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Prediction Result</h1>
+        <div class="result-message {% if result == 'Approved' %}approved{% else %}denied{% endif %}">
+            {{ result }} {% if result == 'Approved' %}✅{% else %}❌{% endif %}
+        </div>
+        <a href="{{ url_for('index') }}" class="back-button">Go Back</a>
+    </div>
+</body>
+</html>
